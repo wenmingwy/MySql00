@@ -1,0 +1,26 @@
+1.建表语句
+student表
+create table student (id NUMBER(5),name VARCHAR(20),age NUMBER(3),gender VARCHAR(10));
+alter table student add constraint PK_Stuid primary key(id);
+alter table student add constraint CK_Student_Gender check(gender='男' or gender='女');
+alter table student add constraint CK_Student_Age check(age>=0 and age<=120);
+subject表
+create table subject(id NUMBER(5) primary key,subject VARCHAR(20),teacher VARCHAR(20),description VARCHAR(100));
+score表
+create table score(id NUMBER(5) primary key,student_id NUMBER(5),subject_id NUMBER(5),score NUMBER(5,2));
+
+alter table score add constraint FK_Score_Student foreign key(student_id) references student(id);
+
+alter table score add constraint FK_student_subject foreign key(subject_id) references subject(id);
+
+2.插入数据语句
+insert into student(id,name,age,gender) values('001','张三','18','男');
+insert into student(id,name,age,gender) values('002','李四','20','女');
+
+insert into subject(id,subject,teacher,description) values('1001','语文','王老师','本次考试比较简单');
+insert into subject(id,subject,teacher,description) values('1002','数学','王老师','本次考试比较简单');
+
+insert into score(id,student_id,subject_id,score) values('1','001','1001',80);
+insert into score(id,student_id,subject_id,score) values('2','002','1002',60);
+insert into score(id,student_id,subject_id,score) values('3','001','1001',70);
+insert into score(id,student_id,subject_id,score) values('4','002','1002',60.5);
